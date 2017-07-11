@@ -37,8 +37,8 @@ export async function put(event, context, callback) {
   const Item = Object.assign(
     {},
     {
+      bucket: "01", // hard coded to support the "Bucket01TimeIdx" global index. supports sorting by time descending
       id: uuidv4(),
-      bucket: '01',
       time: now.getTime(),
       timeISOString: now.toISOString(),
       timeUTCString: now.toUTCString(),
