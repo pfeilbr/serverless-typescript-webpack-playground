@@ -1,5 +1,9 @@
 # serverless-typescript-webpack-playground
 
+project to learn/explore [serverless](https://serverless.com/) + [typescript](https://www.typescriptlang.org/) + [webpack](https://webpack.js.org/)
+
+## Session
+
 example testing and deployment session
 
 ```sh
