@@ -1,0 +1,22 @@
+{
+  "name": "serverless-typescript-webpack-playground",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/async": "^2.0.40",
+    "@types/node": "^8.0.10",
+    "awesome-typescript-loader": "^3.2.1",
+    "serverless": "^1.17.0",
+    "serverless-webpack": "^2.0.0",
+    "tslint": "^5.5.0",
+    "typescript": "^2.4.1",
+    "webpack": "^3.1.0",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "@types/uuid": "^3.0.0",
+    "aws-sdk": "^2.82.0",
+    "uuid": "^3.1.0"
+  }
+}

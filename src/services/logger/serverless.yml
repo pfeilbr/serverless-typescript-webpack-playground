@@ -1,0 +1,63 @@
+service: logger
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  iamRoleStatements:
+    $ref: ./iamRoleStatements.json
+
+plugins:  
+  - serverless-webpack
+
+functions:
+  scan:
+    handler: handler.scan
+    events:
+        - http:
+            path: logger
+            method: get    
+  put:
+    handler: handler.put
+    events:
+        - http:
+            path: logger
+            method: post
+
+resources:
+  Resources:
+    logTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: log
+
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: time
+            AttributeType: N
+          - AttributeName: bucket
+            AttributeType: S
+
+
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: time
+            KeyType: RANGE
+
+        GlobalSecondaryIndexes:
+          - IndexName: Bucket01TimeIdx
+            KeySchema:
+              - AttributeName: bucket
+                KeyType: HASH
+              - AttributeName: time
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1            
