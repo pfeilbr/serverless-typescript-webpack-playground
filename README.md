@@ -1,5 +1,7 @@
 # serverless-typescript-webpack-playground
 
+example testing and deployment session
+
 ```sh
 # cd to service dir
 cd src/services/logger
@@ -16,9 +18,10 @@ curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json"
 
 ## Notes
 
-needed to add the following for webpack + awesome-typescript-loader to run without errors
+* updated `tsconfig.json` with `"target": "es2015"`
+* needed to add the following for webpack + awesome-typescript-loader to run without errors
 
-```sh
-yarn add @types/node --dev
-yarn add @types/async --dev
-```
+    ```sh
+    yarn add @types/node --dev
+    yarn add @types/async --dev
+    ```
