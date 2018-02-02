@@ -5,7 +5,7 @@ export function hello(event, context, callback) {
   const response = {
     body: JSON.stringify({
       input: event,
-      message: "Go Serverless v1.0! Your function executed successfully!",
+      message: "Hello from API key secured endpoint",
     }, null, 2),
     statusCode: 200,
   };

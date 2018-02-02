@@ -1,20 +1,22 @@
 "use strict";
 
 import * as AWS from "aws-sdk";
+import * as fetch from "isomorphic-fetch";
 import * as uuidv4 from "uuid/v4";
+import * as config from "./config";
 
 export async function scan(event, context, callback) {
+
+  console.log("event", JSON.stringify(event, null, 2));
+
   const client = new AWS.DynamoDB();
-  // const resp = await client.scan({TableName: "log"}).promise();
 
   const resp = await client.query({
     ExpressionAttributeNames: {
       "#b": "bucket",
-      // "#t": "time",
     },
     ExpressionAttributeValues: {
       ":bucket": { S: "01" },
-      // ":num": { N: "0" },
     },
     IndexName: "Bucket01TimeIdx",
     KeyConditionExpression: "#b = :bucket", //  and #t > :num
@@ -34,6 +36,7 @@ export async function put(event, context, callback) {
   console.log("event", JSON.stringify(event, null, 2));
   const client = new AWS.DynamoDB.DocumentClient();
   const now = new Date();
+
   const Item = Object.assign(
     {},
     {
@@ -51,4 +54,22 @@ export async function put(event, context, callback) {
   };
 
   callback(null, response);
+}
+
+export async function generateRandomLogItem(event, context, callback) {
+  try {
+    const resp = await fetch(config.apiBaseURL, {
+      body: JSON.stringify({
+        msg: `${(new Date()).toUTCString()} - generated random log item`,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+    callback(null, resp);
+  } catch (err) {
+    console.error(err);
+    return callback(err);
+  }
 }

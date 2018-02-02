@@ -17,7 +17,20 @@ cd src/services/logger
 ../../../node_modules/.bin/sls deploy
 
 # test logger endpoint - create log item
-curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" -X POST https://qkygujm7y8.execute-api.us-east-1.amazonaws.com/dev/logger
+curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" -X POST https://4qodphulj8.execute-api.us-east-1.amazonaws.com/dev/logger
+
+# lambda-limits service
+
+# invoke concurrent lambda executions test
+# ***warning** understand/check resource usage
+curl -X POST https://m1v5komsge.execute-api.us-east-1.amazonaws.com/dev/lambda-limits/concurrent
+
+# kinesis-playground
+# PUT record
+curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" -X POST https://ijkemqb2r8.execute-api.us-east-1.amazonaws.com/dev/stream/put
+
+# tail remote logs
+../../../node_modules/.bin/sls logs -f hello -t
 ```
 
 ## Notes
